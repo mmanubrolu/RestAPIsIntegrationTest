@@ -5,6 +5,8 @@
 	<test name="Rest APIs Test Cases">
 		<classes>
 			<class name="com.rest.api.test.GetAPITest"></class>
+			<class name="com.rest.api.test.PostAPITest"></class>
+			<class name="com.rest.api.test.PutAPITest"></class>
 		</classes>
 	</test>
 </suite>

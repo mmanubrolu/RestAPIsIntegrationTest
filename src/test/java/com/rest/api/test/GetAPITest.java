@@ -2,6 +2,9 @@ package com.rest.api.test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.http.Header;
 import org.apache.http.client.ClientProtocolException;
@@ -37,7 +40,7 @@ public class GetAPITest extends TestBase {
 	
 	@Test(priority=1)
 	public void validateGETAPITest() throws ClientProtocolException, IOException {
-		closableHttpResponse =  restClient.get(url);
+		closableHttpResponse =  restClient.getWithoutHeader(url);
 		
 		// a. get the HTTp Code
 		int httpStatusCode = closableHttpResponse.getStatusLine().getStatusCode();
@@ -80,6 +83,14 @@ public class GetAPITest extends TestBase {
 			headersMap.put(header.getName(), header.getValue());
 		}
 		System.out.println("Headers information :: " + headersMap);
+		Iterator<HashMap.Entry<String, String>> iterator = headersMap.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry<String,String> item = iterator.next();
+			System.out.println("Key :::" + item.getKey() +"   Value : " + item.getValue());
+		}
+		
+		String server = headersMap.get("Server");
+		Assert.assertEquals(server, "cloudflare", "server is not matched");
 		
 	}
 	
