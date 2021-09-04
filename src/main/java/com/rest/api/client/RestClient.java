@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -95,6 +96,20 @@ public class RestClient {
 		
 		CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpPut);
 		
+		return closeableHttpResponse;
+	}
+	
+	public CloseableHttpResponse deleteWithHeader(String url, HashMap<String, String> headerMap) throws IOException {
+		
+		CloseableHttpClient closeableHttpClient = HttpClients.createDefault();
+		HttpDelete httpDelete = new HttpDelete(url);
+		Iterator<Entry<String, String>> iterator = headerMap.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Entry<String, String> header = iterator.next();
+			httpDelete.addHeader(header.getKey(), header.getValue());
+		}
+		
+		CloseableHttpResponse closeableHttpResponse = closeableHttpClient.execute(httpDelete);
 		return closeableHttpResponse;
 	}
 }
