@@ -12,6 +12,7 @@
 			<class name="com.rest.api.test.PostAPITest"></class>
 			<class name="com.rest.api.test.PutAPITest"></class>
 			<class name="com.rest.api.test.DeleteAPITest"></class>
+			<class name="com.rest.api.test.PatchAPITest"></class>
 		</classes>
 	</test>
 </suite>
